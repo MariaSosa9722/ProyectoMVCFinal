@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Proyecto.Context;
 using Proyecto.Models;
@@ -22,15 +23,16 @@ namespace Proyecto.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        //public Task async <IActionResult> Index()
+        //public IActionResult Index()
         //{
-        //    return View(_context.Usuario.TolistAsync());
+        //    return View();
         //}
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Usuarios.Include(z => z.roles).ToListAsync());
+        }
 
         public IActionResult Privacy()
         {

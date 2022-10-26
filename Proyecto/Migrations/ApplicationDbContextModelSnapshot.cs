@@ -18,12 +18,30 @@ namespace Proyecto.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Proyecto.Models.Rol", b =>
+                {
+                    b.Property<int>("PkRol")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PkRol");
+
+                    b.ToTable("Rol");
+                });
+
             modelBuilder.Entity("Proyecto.Models.Usuario", b =>
                 {
                     b.Property<int>("PkUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FkRol")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
@@ -36,7 +54,20 @@ namespace Proyecto.Migrations
 
                     b.HasKey("PkUsuario");
 
+                    b.HasIndex("FkRol");
+
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Usuario", b =>
+                {
+                    b.HasOne("Proyecto.Models.Rol", "roles")
+                        .WithMany()
+                        .HasForeignKey("FkRol")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("roles");
                 });
 #pragma warning restore 612, 618
         }
