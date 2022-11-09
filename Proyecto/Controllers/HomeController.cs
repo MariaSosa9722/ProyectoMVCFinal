@@ -34,6 +34,61 @@ namespace Proyecto.Controllers
             return View(await _context.Usuarios.Include(z => z.roles).ToListAsync());
         }
 
+        [HttpGet]
+        public IActionResult Crear()
+        {
+            return View();
+        }
+
+        //[HttpGet]
+        //public async Task<IActionResult> ListaRol()
+        //{
+
+
+        //    mbox  
+        //}
+
+        [HttpPost]
+        public async Task<IActionResult> Crear(Usuario response)
+        {
+            if (response != null)
+            {
+                Usuario usuario = new Usuario()
+                {
+                    Nombre = response.Nombre,
+                    User = response.User,
+                    Password = response.Password,
+                    FkRol = 1
+                };
+
+                _context.Usuarios.Add(usuario);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));  
+                
+
+            }
+          
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var Usuario = _context.Usuarios.Find(id);
+            if (Usuario == null)
+            {
+                return NotFound();
+            }
+
+            return View(Usuario);
+        }
         public IActionResult Privacy()
         {
             return View();

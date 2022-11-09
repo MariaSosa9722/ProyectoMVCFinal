@@ -1,0 +1,67 @@
+﻿@model Proyecto.Models.Usuario
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+@*<h1 class="text-center">Bienvenidos</h1>*@
+
+
+<di v class="container-fluid">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h1 class="text-white"><strong>Editar usuario</strong></h1>
+
+            </div>
+
+            <div class="card-body">
+
+                <form asp-action="Crear" method="post">
+
+                    @*Id del usuario oculto*@
+
+                    <input type="hidden" asp-for="PkUsuario" />
+                    
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control" placeholder="Ingresa el nombre" required />
+
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="User" class="control-label"></label>
+                        <input asp-for="User" class="form-control" placeholder="Ingresa el usuario" required />
+
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" placeholder="Ingresa la contraseña" required />
+
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-secondary d-block mx-auto"><i class="bi bi-person-fill"></i> Guardar</button>
+                    </div>
+
+
+                </form>
+
+                <a asp-controller="Home" asp-action="Index">Volver</a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+</di>
+
+
+

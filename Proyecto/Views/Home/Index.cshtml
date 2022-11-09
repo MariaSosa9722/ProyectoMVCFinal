@@ -6,8 +6,8 @@
 
 @*<h1 class="text-center">Bienvenidos</h1>*@
 <div class="row">
-    <div class=" offset-9 col-3 mb-3">
-        <a asp-action="Crear" asp-controller="Home" class="btn-success d-block mx-auto btn-lg"> Nuevo Usuario</a>
+    <div class="offset-10 col-3 mb-3">
+        <a asp-action="Crear" asp-controller="Home" class="btn-success mx-auto btn-lg"> <i class="fa-solid fa-user"></i></i>Nuevo</a>
     </div>
 </div>
 
@@ -29,7 +29,7 @@
                         <table class="table table-bordered" id="tblUsuarios" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th> Id</th>
+                                   @* <th> Id</th>*@
                                     <th> @Html.DisplayNameFor(x => x.Nombre )</th>
                                     <th> @Html.DisplayNameFor(x => x.User )</th>
                                     <th> @Html.DisplayNameFor(x => x.Password )</th>
@@ -40,21 +40,21 @@
 
                             </thead>
                             <tbody>
-                                
+                                @*@int i =0*@
                                    @foreach(var Item  in Model ){
 
 
                                        <tr>
                                         
-                                       <td>(@i++)</td>
+                                       @*<td>(@i++)</td>*@
 
                                         <td> @Html.DisplayFor(x => Item.Nombre )</td>
                                         <td> @Html.DisplayFor(x => Item.User )</td>
                                         <td> @Html.DisplayFor(x => Item.Password )</td>
                                         <td> @Html.DisplayFor(x => Item.roles.Nombre)</td>
-                                        <td> 
-                                            <a class=" btn btn-warning" asp-action="Editar" asp-route-id =@Item.PkUsuario> Editar</a>
-                                            <a class=" btn btn-danger" asp-action="Eliminar" asp-route-id=@Item.PkUsuario> Eliminar</a>
+                                        <td>
+                                            <a class=" btn btn-warning" asp-action="Editar" asp-route-id=@Item.PkUsuario><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                                            <a class=" btn btn-danger" asp-action="Eliminar" asp-route-id=@Item.PkUsuario><i class="fa-solid fa-trash"></i> Eliminar</a>
                                         </td>
 
                                        </tr>
@@ -85,7 +85,33 @@
 </di>
 
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#tblUsuarios').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        }); 
+    </script>
+
+}  
