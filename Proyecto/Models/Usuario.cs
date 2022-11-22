@@ -16,4 +16,10 @@ namespace Proyecto.Models
 
         public Rol roles { get; set; }
     }
+
+    public class PostLlogin
+    {
+        public string User { get; set; }
+        public string Password { get; set; }
+    }
 }

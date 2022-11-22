@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Proyecto.Context;
@@ -27,7 +28,7 @@ namespace Proyecto.Controllers
         //{
         //    return View();
         //}
-
+  
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -89,6 +90,40 @@ namespace Proyecto.Controllers
 
             return View(Usuario);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarUsuario(Usuario response)
+        {
+
+
+            Usuario usuario = _context.Usuarios.Find(response.PkUsuario);
+
+            usuario.Nombre = response.Nombre;
+            usuario.User = response.User;
+            usuario.FkRol = 1;
+
+            _context.Entry(usuario).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+
+
+
+        }
+
+        public async Task<IActionResult> DeleteUser (int Id)
+        {
+            var user = _context.Usuarios.Find(Id);
+
+            _context.Usuarios.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+
+
+
+        }
+
         public IActionResult Privacy()
         {
             return View();

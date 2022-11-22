@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Proyecto.Models.Articulo>
+
+@{
+    ViewData["Title"] = "articulo Page";
+    Layout = "_LayoutDashboard";
+}
+
+
+<br />
+
+<div class="row">
+    <div class="offset-10 col-3 mb-3">
+        <a asp-action="Crear" asp-controller="Articulo" class="btn-success mx-auto btn-lg"> <i class="fa-solid fa-user"></i>Nuevo</a>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h1 class="text-white"><strong>Lista de articulos</strong></h1>
+
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    @if (Model.Count() > 0)
+                    {
+
+                        <table class="table table-bordered" id="tblArticulo" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    @* <th> Id</th>*@
+                                    <th> @Html.DisplayNameFor(x => x. Nombre)</th>
+                                    <th> @Html.DisplayNameFor(x => x.Descripcion )</th>
+                                    <th> @Html.DisplayNameFor(x => x.UrlImg )</th>
+                                
+                                    <th> Acciones</th>
+                                </tr>
+
+
+                            </thead>
+                            <tbody>
+                                @*@int i =0*@
+                                @foreach (var Item in Model)
+                                {
+
+
+                                    <tr>
+
+                                        @*<td>(@i++)</td>*@
+
+
+                                        <td> @Html.DisplayFor(x => Item.Nombre )</td>
+                                        <td> @Html.DisplayFor(x => Item.Descripcion )</td>
+                                        <td> @Html.DisplayFor(x => Item.UrlImg )</td>
+                                      
+                                        <td>
+                                            <a class=" btn btn-warning" asp-route-id=@Item.PkArticulo><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                                            <a class=" btn btn-danger" asp-route-id=@Item.PkArticulo id="Obtener"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                                        </td>
+
+                                    </tr>
+
+
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    }
+                    else
+                    {
+                        <p>No hay registros</p>
+                    }
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#tblArticulo').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            function GetId(id) {
+
+            }
+
+            var table = $('#tblArticulo').DataTable();
+
+
+
+            $('#tblArticulo').on('click', 'tr', function () {
+                var id = table.row(this).id();
+
+                alert('Clicked row id ' + id);
+            });
+
+        });
+
+
+
+
+    </script>
+
+}  

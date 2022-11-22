@@ -1,17 +1,16 @@
-﻿@model Proyecto.Models.Usuario
+﻿@model Proyecto.Models.Articulo
 @{
-    ViewData["Title"] = "Crear Usuario";
+    ViewData["Title"] = "Crear Articulo";
     Layout = "_LayoutDashboard";
 }
 
-@*<h1 class="text-center">Bienvenidos</h1>*@
 
 
 <di v class="container-fluid">
     <div class="offset-12">
         <div class="card border">
             <div class="card-header bg-dark">
-                <h1 class="text-white"><strong>Crear usuario</strong></h1>
+                <h1 class="text-white"><strong>Crear articulo</strong></h1>
 
             </div>
 
@@ -27,14 +26,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="User" class="control-label"></label>
-                        <input asp-for="User" class="form-control" placeholder="Ingresa el usuario" required />
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" placeholder="Ingresa la descripcion" required />
 
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" placeholder="Ingresa la contraseña" required />
+                        <label asp-for="UrlImg" class="control-label"></label>
+                        <input asp-for="UrlImg" class="form-control" placeholder="Ingresa el link" required />
 
                     </div>
 
@@ -45,7 +44,7 @@
 
                 </form>
 
-                <a asp-controller="Home" asp-action="Index">Volver</a>
+                <a asp-controller="Articulo" asp-action="Index">Volver</a>
 
 
             </div>

@@ -1,6 +1,7 @@
 ﻿@model Proyecto.Models.Usuario
 @{
     ViewData["Title"] = "Editar Usuario";
+    Layout = "_LayoutDashboard";
 }
 
 @*<h1 class="text-center">Bienvenidos</h1>*@
@@ -16,7 +17,7 @@
 
             <div class="card-body">
 
-                <form asp-action="Crear" method="post">
+                <form asp-action="EditarUsuario" method="post">
 
                     @*Id del usuario oculto*@
 

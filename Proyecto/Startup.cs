@@ -47,6 +47,7 @@ namespace Proyecto
             app.UseStaticFiles();
 
             app.UseRouting();
+        
 
             app.UseAuthorization();
 
@@ -54,7 +55,7 @@ namespace Proyecto
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}");
             });
         }
     }
