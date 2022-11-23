@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Proyecto.Context;
@@ -32,12 +33,28 @@ namespace Proyecto.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+
+         
+            return View(await _context.Usuarios.Include(z => z.roles).ToListAsync());
+        }
+
+     
+
+
+        [HttpGet]
+        public async Task<IActionResult> IndexCopia()
+        {
             return View(await _context.Usuarios.Include(z => z.roles).ToListAsync());
         }
 
         [HttpGet]
         public IActionResult Crear()
         {
+            ViewBag.Roles = _context.Roles.Select(p => new SelectListItem()
+            {
+                Text = p.Nombre,
+                Value = p.PkRol.ToString()
+            });
             return View();
         }
 

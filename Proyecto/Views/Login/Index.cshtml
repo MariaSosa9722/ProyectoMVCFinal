@@ -18,12 +18,15 @@
             <div class="col-sm-5">
                 <input type="password" class="form-control" id="password">
             </div>
+        <p id="parrafo1"></p>
         </div>
         <div id="FormLog">
 
             <button type="submit" id="Login" class="btn btn-success d-block">Iniciar</button>
 
         </div>
+
+ 
 
 
       
@@ -49,13 +52,21 @@
                 dataType: "json",
                 success: function (response) { 
                     console.log(response)
-                    debugger
+              
                     if (response.success == true) {
 
-                        window.location.href = "/Home/Index";
+                        //debugger
+                        if(response.admin == true){
+                            window.location.href = "/Home/Index";
+                        }
+                        else {
+                            window.location.href = "/Home/IndexCopia";
+                        }
+                        
                     }
                     else
-                        window.location.href = "@Url.Action("Index", "Login")";
+
+                        $("#parrafo1").html("<div  class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Usuario o contraseña incorrecto</strong> Intentalo de nuevo.</div>");
                        
                 },
                 error: function () {

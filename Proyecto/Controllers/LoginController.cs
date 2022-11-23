@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Proyecto.Context;
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 
@@ -27,18 +29,23 @@ namespace Proyecto.Controllers
         {
             try
             {
-                var response = _context.Usuarios.Where(x => x.User == user && x.Password == password).ToList();
-                if (response.Count() > 0)
-                {
-                    return Json(new { Success = true });
+                var response = _context.Usuarios.Include(z => z.roles)
+                                .FirstOrDefault(x => x.User == user &&
+                                x.Password == password);
 
+
+                if (response != null )
+                {
+                    if (response.roles.Nombre == "admin")
+                    {
+                        return Json(new { Success = true, admin = true });
+                    }
+                    return Json(new { Success = true, admin = false });
                 }
                 else
                 {
-                    return Json(new { Success = false });
+                    return Json(new { Success = false, admin= false });
                 }
-
-
 
             }
             catch (Exception ex)
