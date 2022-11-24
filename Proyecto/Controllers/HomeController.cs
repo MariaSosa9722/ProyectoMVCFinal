@@ -76,7 +76,7 @@ namespace Proyecto.Controllers
                     Nombre = response.Nombre,
                     User = response.User,
                     Password = response.Password,
-                    FkRol = 1
+                    FkRol = response.FkRol,
                 };
 
                 _context.Usuarios.Add(usuario);
@@ -104,6 +104,13 @@ namespace Proyecto.Controllers
             {
                 return NotFound();
             }
+
+
+            ViewBag.Roles = _context.Roles.Select(p => new SelectListItem()
+            {
+                Text = p.Nombre,
+                Value = p.PkRol.ToString()
+            });
 
             return View(Usuario);
         }

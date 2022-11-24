@@ -56,7 +56,7 @@
 
                                         <td> @Html.DisplayFor(x => Item.Nombre )</td>
                                         <td> @Html.DisplayFor(x => Item.Descripcion )</td>
-                                        <td> @Html.DisplayFor(x => Item.UrlImg )</td>
+                                        <td> <img width="25" src="@Html.DisplayFor(x => Item.UrlImg)"> </td>
                                       
                                         <td>
                                             <a class=" btn btn-warning" asp-route-id=@Item.PkArticulo><i class="fa-solid fa-pen-to-square"></i> Editar</a>

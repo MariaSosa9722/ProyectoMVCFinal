@@ -19,9 +19,9 @@ namespace Proyecto.Controllers
             _context = context;
 
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Articulos.ToListAsync());
         }
 
         [HttpPost]
